@@ -17,10 +17,12 @@ import com.xee.sdk.core.common.XeeEnv;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
+import com.xee.sdk.core.auth.endpoint.AuthEndpoint;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +41,15 @@ public class MainActivity extends AppCompatActivity  {
         this.logIn =  findViewById(R.id.sign_in_button);
 
         OAuth2Client oAuthClient = new OAuth2Client.Builder()
-                .clientId("324b3e00-2ccf-477e-833e-b1c819c6577f")
+                .clientId("b3707f5bd3ab8bc767fc7f9982acac85")
                 .clientSecret("b0aeab4367810e479a4166c1f6668ccffcb1b0a492d8eb92a28699516c2f3751")
-                .scopes(Arrays.asList("vehicles.read"))
+                .redirectUri("http://localhost")
+                .scopes(Arrays.asList("account.read"))
                 .build();
 
 
 
-        this.xenv = new XeeEnv(this, oAuthClient);
+        this.xenv = new XeeEnv(this, oAuthClient,"api.xee.com/v4");
         this.xapi = new XeeApi(this.xenv, true);
         this.xeau = new XeeAuth(this.xenv, true);
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public void logIn(View v)
     {
-        xeau.connect(new AuthenticationCallback() {
+        this.xeau.connect(new AuthenticationCallback() {
             @Override
             public void onError(@NotNull Throwable throwable) {
                 Log.i("RES-Errreur",throwable.getMessage());
