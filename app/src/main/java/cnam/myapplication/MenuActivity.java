@@ -1,23 +1,59 @@
 package cnam.myapplication;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.icu.text.ListFormatter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
+import com.xee.sdk.api.model.Vehicle;
+import com.xee.sdk.core.auth.DisconnectCallback;
+
+import java.util.List;
+import java.util.Observable;
+import java.util.function.Consumer;
+
+import cnam.myapplication.Classes.ApiService;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class MenuActivity extends AppCompatActivity {
+    List<Vehicle> lve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
 
+    @SuppressLint("CheckResult")
+    public void getCars() {
+        ApiService.getInstance().getXapi().getUserVehicles()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new io.reactivex.functions.Consumer<List<Vehicle>>() {
+                    @Override
+                    public void accept(List<Vehicle> vehicles) throws Exception {
+                        Log.i("TAILLE", String.valueOf(vehicles.size()));
+                    }
+                }, new io.reactivex.functions.Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e("FAIL", throwable.getMessage());
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    }
+                });
+    }
+
+    public void logOut(View v) {
+        ApiService.getInstance().getXeau().disconnect(new DisconnectCallback() {
+            @Override
+            public void onCompleted() {
+                startActivity(new Intent(MenuActivity.this, MainActivity.class));
+            }
+        });
     }
 
 }

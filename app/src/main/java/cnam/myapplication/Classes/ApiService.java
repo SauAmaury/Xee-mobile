@@ -8,6 +8,7 @@ import com.xee.sdk.core.auth.XeeAuth;
 import com.xee.sdk.core.common.XeeEnv;
 
 import java.util.Arrays;
+import java.util.List;
 
 public final class ApiService {
 
@@ -18,13 +19,14 @@ public final class ApiService {
     private static ApiService instance = null;
 
     private final static boolean log = true;
+    private final List<String> scopes = Arrays.asList("vehicles.read", "vehicles.management", "vehicles.signals.read", "vehicles.locations.read", "vehicles.accelerometers.read", "vehicles.privacies.read", "vehicles.privacies.management", "vehicles.trips.read", "vehicles.loans.read", "vehicles.loans.management", "account.read", "vehicles.devices-data.read", "vehicles.events.read", "vehicles.gyroscopes.read", "fleets.read");
 
     private ApiService() {
         ApiService.oac = new OAuth2Client.Builder()
                 .clientId("b3707f5bd3ab8bc767fc7f9982acac85")
                 .clientSecret("b0aeab4367810e479a4166c1f6668ccffcb1b0a492d8eb92a28699516c2f3751")
                 .redirectUri("http://localhost")
-                .scopes(Arrays.asList("account.read"))
+                .scopes(this.scopes)
                 .build();
     }
 

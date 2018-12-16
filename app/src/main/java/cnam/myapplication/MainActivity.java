@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.xee.sdk.core.auth.AuthenticationCallback;
+import com.xee.sdk.core.auth.DisconnectCallback;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,20 +24,23 @@ public class MainActivity extends AppCompatActivity {
         if (ApiService.getInstance().getXenv() == null) {
             ApiService.getInstance().initEnv(this);
         }
+
     }
 
     public void logIn(View v) {
         ApiService.getInstance().getXeau().connect(new AuthenticationCallback() {
             @Override
             public void onError(@NotNull Throwable throwable) {
-                Log.i("RES-Errreur", throwable.getMessage());
+                Log.i("Login", throwable.getMessage());
             }
+
             @Override
             public void onSuccess() {
-                Log.i("RES-Ok", "Utilisateur connecté");
+                Log.i("Login", "Utilisateur connecté");
                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
             }
         });
     }
+
 }
 
