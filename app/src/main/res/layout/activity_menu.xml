@@ -36,7 +36,8 @@
                 android:id="@+id/vehicles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mes véhicules" />
+                android:text="Mes véhicules"
+                android:onClick="getVehicles"/>
 
             <Button
                 android:id="@+id/localization"

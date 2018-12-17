@@ -28,23 +28,9 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-    @SuppressLint("CheckResult")
-    public void getCars() {
-        ApiService.getInstance().getXapi().getUserVehicles()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new io.reactivex.functions.Consumer<List<Vehicle>>() {
-                    @Override
-                    public void accept(List<Vehicle> vehicles) throws Exception {
-                        Log.i("TAILLE", String.valueOf(vehicles.size()));
-                    }
-                }, new io.reactivex.functions.Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e("FAIL", throwable.getMessage());
-
-                    }
-                });
+    public void getVehicles(View v)
+    {
+        startActivity(new Intent(MenuActivity.this, VehicleActivity.class));
     }
 
     public void logOut(View v) {
