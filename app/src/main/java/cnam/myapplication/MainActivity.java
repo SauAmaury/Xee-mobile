@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess() {
+                ApiService.getInstance().getVehiclesId();
                 Log.i("Login", "Utilisateur connecté");
                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
             }
