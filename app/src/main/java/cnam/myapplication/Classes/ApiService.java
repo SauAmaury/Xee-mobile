@@ -1,14 +1,20 @@
 package cnam.myapplication.Classes;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.xee.sdk.api.XeeApi;
+import com.xee.sdk.api.model.Vehicle;
 import com.xee.sdk.core.auth.OAuth2Client;
 import com.xee.sdk.core.auth.XeeAuth;
 import com.xee.sdk.core.common.XeeEnv;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public final class ApiService {
 
@@ -20,6 +26,8 @@ public final class ApiService {
 
     private final static boolean log = true;
     private final List<String> scopes = Arrays.asList("vehicles.read", "vehicles.management", "vehicles.signals.read", "vehicles.locations.read", "vehicles.accelerometers.read", "vehicles.privacies.read", "vehicles.privacies.management", "vehicles.trips.read", "vehicles.loans.read", "vehicles.loans.management", "account.read", "vehicles.devices-data.read", "vehicles.events.read", "vehicles.gyroscopes.read", "fleets.read");
+    private static List<String> userVehicleId = new ArrayList<String>();
+
 
     private ApiService() {
         ApiService.oac = new OAuth2Client.Builder()
@@ -40,6 +48,26 @@ public final class ApiService {
         xenv = new XeeEnv(ap, oac, "api.xee.com/v4");
     }
 
+    public static void getVehiclesId() {
+        xapi.getUserVehicles()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new io.reactivex.functions.Consumer<List<Vehicle>>() {
+                    @Override
+                    public void accept(List<Vehicle> vehicles) throws Exception {
+                        for(int i=0;i<vehicles.size();i++) {
+                            userVehicleId.add(vehicles.get(i).getId());
+                        }
+                    }
+                }, new io.reactivex.functions.Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e("FAIL", throwable.getMessage());
+
+                    }
+                });
+    }
+
     public static XeeEnv getXenv() {
         return xenv;
     }
@@ -51,6 +79,8 @@ public final class ApiService {
     public static XeeApi getXapi() {
         return xapi;
     }
+
+    public static List<String> getUserVehicleId() {return userVehicleId;}
 
     public static ApiService getInstance() {
         if (instance == null) {
