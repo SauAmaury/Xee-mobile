@@ -46,8 +46,15 @@
 
         <activity
             android:name=".LocationActivity"
-            android:label="@string/title_activity_location"></activity>
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+            android:label="@string/title_activity_location" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".AlertActivity" />
+        <activity android:name=".ProfilActivity" />
+        <activity android:name=".StatActivity"></activity>
     </application>
 
 </manifest>

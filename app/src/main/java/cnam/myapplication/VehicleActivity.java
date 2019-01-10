@@ -18,6 +18,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class VehicleActivity extends AppCompatActivity {
 
+    /**
+     * Appel a la création de la page Vehicule
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,9 @@ public class VehicleActivity extends AppCompatActivity {
         this.getCars();
     }
 
+    /**
+     * Gestion de l'affichage des voitures
+     */
     @SuppressLint("CheckResult")
     public void getCars() {
         ApiService.getInstance().getXapi().getUserVehicles()
@@ -44,6 +52,11 @@ public class VehicleActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Affiche toute les voitures dans le LinearLayout avec id content
+     *
+     * @param v liste des voitures
+     */
     public void addCarToUi(List<Vehicle> v)
     {
         LinearLayout ll = (LinearLayout)findViewById(R.id.content);
@@ -56,20 +69,26 @@ public class VehicleActivity extends AppCompatActivity {
             LinearLayout lh2 = new LinearLayout(this);
             lh2.setOrientation(LinearLayout.HORIZONTAL);
 
+
             TextView txlabel = new TextView(this);
             txlabel.setText("Marque : ");
             TextView txcontent = new TextView(this);
             txcontent.setText(v.get(i).getBrand());
 
-            lh.addView(txlabel);lh.addView(txcontent);
+            lh.addView(txlabel);
+            lh.addView(txcontent);
+            lh.setPadding(10, 20, 0, 0);
             lv.addView(lh);
+
 
             TextView txlabel2 = new TextView(this);
             txlabel2.setText("Modèle : ");
             TextView txcontent2 = new TextView(this);
             txcontent2.setText(v.get(i).getModel());
 
-            lh2.addView(txlabel2);lh2.addView(txcontent2);
+            lh2.addView(txlabel2);
+            lh2.addView(txcontent2);
+            lh2.setPadding(10, 0, 0, 0);
             lv.addView(lh2);
 
             ll.addView(lv);

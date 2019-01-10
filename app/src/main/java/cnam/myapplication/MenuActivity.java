@@ -28,10 +28,27 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
+
+    public void getProfil(View v)
+    {
+        startActivity(new Intent(MenuActivity.this, ProfilActivity.class));
+    }
+
     public void getVehicles(View v)
     {
         startActivity(new Intent(MenuActivity.this, VehicleActivity.class));
     }
+
+    public void getLocation(View v)
+    {
+        startActivity(new Intent(MenuActivity.this, LocationActivity.class));
+    }
+
+    public void getStat(View v)
+    {
+        startActivity(new Intent(MenuActivity.this, LocationActivity.class));
+    }
+
 
     public void logOut(View v) {
         ApiService.getInstance().getXeau().disconnect(new DisconnectCallback() {

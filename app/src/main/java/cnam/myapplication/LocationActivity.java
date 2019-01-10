@@ -43,10 +43,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         Date dd = cal.getTime();
         cal.set(2017,11,31);
         Date df = cal.getTime();
-        Log.i("SIZE",String.valueOf(ApiService.getInstance().getUserVehicleId().size()));
 
         for(int i=0;i<ApiService.getInstance().getUserVehicleId().size();i++) {
-            ApiService.getInstance().getXapi().getVehicleLocations(ApiService.getUserVehicleId().get(0),dd,df,20)
+            ApiService.getInstance().getXapi().getVehicleLocations(ApiService.getUserVehicleId().get(i))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new io.reactivex.functions.Consumer<List<Location>>() {

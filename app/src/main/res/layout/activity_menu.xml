@@ -30,6 +30,7 @@
                 android:id="@+id/profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="getProfil"
                 android:text="Mon profil" />
 
             <Button
@@ -43,18 +44,14 @@
                 android:id="@+id/localization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="getLocation"
                 android:text="Localisation véhicules" />
-
-            <Button
-                android:id="@+id/trip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mes trajets" />
 
             <Button
                 android:id="@+id/stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="getStat"
                 android:text="Statistiques" />
 
             <Button
