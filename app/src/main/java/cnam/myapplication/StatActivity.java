@@ -23,7 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class StatActivity extends AppCompatActivity {
-    /*
+    /**
      *   Données affichées sur l'activitée
      *   Format d'affichage :
      *   NomVariable         =       Information

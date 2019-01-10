@@ -28,7 +28,9 @@ public final class ApiService {
     private final List<String> scopes = Arrays.asList("vehicles.read", "vehicles.management", "vehicles.signals.read", "vehicles.locations.read", "vehicles.accelerometers.read", "vehicles.privacies.read", "vehicles.privacies.management", "vehicles.trips.read", "vehicles.loans.read", "vehicles.loans.management", "account.read", "vehicles.devices-data.read", "vehicles.events.read", "vehicles.gyroscopes.read", "fleets.read");
     private static List<String> userVehicleId = new ArrayList<String>();
 
-
+    /**
+     * Constructeur privé (principe du Singleton)
+     */
     private ApiService() {
         ApiService.oac = new OAuth2Client.Builder()
                 .clientId("b3707f5bd3ab8bc767fc7f9982acac85")
@@ -38,16 +40,28 @@ public final class ApiService {
                 .build();
     }
 
+    /**
+     * Fonction qui permet d'initialiser les objets pour le bon fonctionnement
+     * de l'application
+     * @param ap
+     */
     public static void initEnv(AppCompatActivity ap) {
         xenv = new XeeEnv(ap, oac, "api.xee.com/v4");
         xapi = new XeeApi(xenv, ApiService.log);
         xeau = new XeeAuth(xenv, ApiService.log);
     }
 
+    /**
+     * Fonction qui permet de changer l'environnement si l'activité change
+     * @param ap
+     */
     public static void updateEnv(AppCompatActivity ap) {
         xenv = new XeeEnv(ap, oac, "api.xee.com/v4");
     }
 
+    /**
+     * Fonction qui permet d'obtenir les id des véhicules de l'utilisateur
+     */
     public static void getVehiclesId() {
         xapi.getUserVehicles()
                 .subscribeOn(Schedulers.io())
@@ -68,6 +82,10 @@ public final class ApiService {
                 });
     }
 
+    /**
+     * Getter
+     */
+
     public static XeeEnv getXenv() {
         return xenv;
     }
@@ -81,6 +99,7 @@ public final class ApiService {
     }
 
     public static List<String> getUserVehicleId() {return userVehicleId;}
+
 
     public static ApiService getInstance() {
         if (instance == null) {

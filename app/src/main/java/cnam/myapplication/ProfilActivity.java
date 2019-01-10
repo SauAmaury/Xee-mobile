@@ -14,11 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    /**
-     * Appel a la création de la page Profil
-     *
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +24,7 @@ public class ProfilActivity extends AppCompatActivity {
 
 
     /**
-     * Gestion du profil
+     * Fonction qui récupére les infos de l'utilisateur
      */
     @SuppressLint("CheckResult")
     public void getProfil() {
@@ -50,7 +46,7 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     /**
-     * Ajoute sur la page, les informations de l'utilisateur
+     * Fonction qui ajoute sur la page, les informations de l'utilisateur
      *
      * @param user utilisateur de l'application
      */

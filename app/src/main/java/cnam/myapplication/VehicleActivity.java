@@ -18,11 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class VehicleActivity extends AppCompatActivity {
 
-    /**
-     * Appel a la création de la page Vehicule
-     *
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +27,8 @@ public class VehicleActivity extends AppCompatActivity {
     }
 
     /**
-     * Gestion de l'affichage des voitures
+     * Fonction qui récupére les véhicules avec leur spécification
+     * de l'utilisateur
      */
     @SuppressLint("CheckResult")
     public void getCars() {

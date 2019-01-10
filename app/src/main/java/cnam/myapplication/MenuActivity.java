@@ -20,7 +20,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class MenuActivity extends AppCompatActivity {
-    List<Vehicle> lve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,28 +27,46 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-
+    /**
+     * Lance l'activité Profil
+     * @param v
+     */
     public void getProfil(View v)
     {
         startActivity(new Intent(MenuActivity.this, ProfilActivity.class));
     }
 
+    /**
+     * Lance l'activité véhicule
+     * @param v
+     */
     public void getVehicles(View v)
     {
         startActivity(new Intent(MenuActivity.this, VehicleActivity.class));
     }
 
+    /**
+     * Lance l'activité Localisation
+     * @param v
+     */
     public void getLocation(View v)
     {
         startActivity(new Intent(MenuActivity.this, LocationActivity.class));
     }
 
+    /**
+     * Lance l'activité Statistiques
+     * @param v
+     */
     public void getStat(View v)
     {
-        startActivity(new Intent(MenuActivity.this, LocationActivity.class));
+        startActivity(new Intent(MenuActivity.this, StatActivity.class));
     }
 
-
+    /**
+     * Déconnecte l'utilisateur
+     * @param v
+     */
     public void logOut(View v) {
         ApiService.getInstance().getXeau().disconnect(new DisconnectCallback() {
             @Override

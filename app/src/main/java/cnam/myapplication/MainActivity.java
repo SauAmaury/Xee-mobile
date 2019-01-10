@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Fonction qui va permmettre de lancer une activité du SDK Xee
+     * permettant à l'utilisateur de se connecter ou de s'inscrire
+     * @param v la vue principale
+     */
     public void logIn(View v) {
         ApiService.getInstance().getXeau().connect(new AuthenticationCallback() {
             @Override

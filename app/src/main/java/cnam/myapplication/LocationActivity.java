@@ -37,6 +37,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
     }
 
+    /**
+     * Fonction permettant de récupérer la localisation des véhicules
+     */
     public void getVehicleLocation(){
         Calendar cal = Calendar.getInstance();
         cal.set(2017,10,15);
@@ -65,13 +68,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
 
     /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     * Fonction qui se lancera une fois le module Google map prêt
+     * @param googleMap
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
